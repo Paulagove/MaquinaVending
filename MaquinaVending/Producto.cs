@@ -10,6 +10,16 @@ namespace MaquinaVending {
     protected int Unidades { get; set; }
     protected double PrecioUnitario { get; set; }
     protected string Descripcion { get; set; }
-    
+
+
+        public Producto(int id, string nombre, int unidades, double precioUnitario, string descripcion)
+        {
+            Id = id;
+            Nombre = nombre;
+            Unidades = unidades;
+            PrecioUnitario = precioUnitario;
+            Descripcion = descripcion;
+        }
+
+
     }
-}
