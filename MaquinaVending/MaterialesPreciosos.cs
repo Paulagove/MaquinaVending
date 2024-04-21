@@ -16,5 +16,10 @@ namespace MaquinaVending {
             TipoMaterial = tipoMaterial;
             Peso = peso;
         }
+        public override string MostrarDetalles()
+        {
+            return base.MostrarDetalles() + $"Tipo de material: {TipoMaterial}, Peso {Peso}";
+        }
+
     }
 }

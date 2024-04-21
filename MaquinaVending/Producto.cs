@@ -21,5 +21,9 @@ namespace MaquinaVending {
             Descripcion = descripcion;
         }
 
+        public virtual string MostrarDetalles()
+        {
+            return $"Nombre: {Nombre}, Unidades: {Unidades}, Precio por Unidad: {PrecioUnitario}";
+        }
 
     }

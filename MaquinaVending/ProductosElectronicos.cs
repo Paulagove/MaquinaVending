@@ -20,6 +20,11 @@ namespace MaquinaVending {
             Precargado = precargado;
         }
 
+        public override string MostrarDetalles()
+        {
+            return base.MostrarDetalles() + $"Tipo de Material: {TipoMaterial}, Tiene Bateria {TieneBateria}, Viene precargado {Precargado}";
+        }
+
 
     }
 }

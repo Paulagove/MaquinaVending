@@ -14,5 +14,10 @@ namespace MaquinaVending {
         {
             InformacionNutricional = informacionNutricional;
         }
+
+        public override string MostrarDetalles()
+        {
+            return base.MostrarDetalles() + $"Informacion Nutricional: {InformacionNutricional}";
+        }
     }
 }
