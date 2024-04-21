@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal abstract class Producto {
-    protected string Nombre {  get; set; }
-    protected int Unidades { get; set; }
-    protected double PrecioUnitario { get; set; }
-    protected string Descripcion { get; set; }
+        protected int Id { get; set; }
+        protected string Nombre { get; set; }
+        protected int Unidades { get; set; }
+        protected double PrecioUnitario { get; set; }
+        protected string Descripcion { get; set; }
 
 
-        public Producto(int id, string nombre, int unidades, double precioUnitario, string descripcion)
-        {
+        public Producto(int id, string nombre, int unidades, double precioUnitario, string descripcion) {
             Id = id;
             Nombre = nombre;
             Unidades = unidades;
@@ -23,3 +23,4 @@ namespace MaquinaVending {
 
 
     }
+}
