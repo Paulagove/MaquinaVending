@@ -45,8 +45,7 @@
   <ItemGroup>
     <Compile Include="Admin.cs" />
     <Compile Include="MaterialesPreciosos.cs" />
-    <Compile Include="PagoEfectivo.cs" />
-    <Compile Include="PagoTarjeta.cs" />
+    <Compile Include="Pago.cs" />
     <Compile Include="Producto.cs" />
     <Compile Include="ProductosAlimenticios.cs" />
     <Compile Include="ProductosElectronicos.cs" />
