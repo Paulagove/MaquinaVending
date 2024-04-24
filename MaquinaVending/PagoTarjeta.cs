@@ -9,7 +9,7 @@ namespace MaquinaVending {
         private int NumeroTarjeta { get; set; }
         private DateTime FechaTarjeta { get; set; }
         private int CVV { get; set; }
-        public PagoTarjeta() { }
+        public PagoTarjeta() {}
 
         public void Pago() {
             Console.Write("Introduzca el número de la tarjeta: ");

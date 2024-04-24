@@ -9,7 +9,7 @@ namespace MaquinaVending {
         protected int Id { get; set; }
         protected string Nombre { get; set; }
         protected int Unidades { get; set; }
-        protected double PrecioUnitario { get; set; }
+        public double PrecioUnitario { get; set; }
         protected string Descripcion { get; set; }
 
 

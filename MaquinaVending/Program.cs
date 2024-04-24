@@ -26,13 +26,13 @@ namespace MaquinaVending {
                 switch (opcion)
                 {
                     case 1:
-                       
+                        RealizarCompra();
                         break;
                     case 2:
-                        
-
+                        SolicitarDetallesProducto();
                         break;
                     case 3:
+                        
                         break;
                     case 4:
                         break;

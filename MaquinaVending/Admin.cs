@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -22,7 +23,7 @@ namespace MaquinaVending {
                 return false;
             }
         }
-        public void CargaIndividual() {
+        public void CargaIndividual(string password) {
             int opcion = 0;
             do {
                 Console.WriteLine("--- Carga individual de productos ---");
@@ -33,22 +34,36 @@ namespace MaquinaVending {
                 opcion = int.Parse(Console.ReadLine());
                 switch (opcion) {
                     case 1:
-
+                        CargaIndividual();
                         break;
                     case 2:
-
+                        CargaCompleta();
                         break;
                     case 3:
                         Console.WriteLine("Saliendo al menú principal...");
                         break;
                 }
             } while (opcion != 3);
+
         }
+
+        public void CargaIndividual() {
+        }
+
+
         public void CargaCompleta() {
-            //se carga el contenido de la máqina utilizando un archivo
+            //se carga el contenido de la máquina utilizando un archivo
+            string separador = ",";
+
+            StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv");
+            string header = sr.ReadLine();
+            Console.WriteLine(header);
+            string linea = " ";
+            while ((linea = sr.ReadLine()) != null) {
+
+            }
         }
-        }
-       
     }
+}
 
 
