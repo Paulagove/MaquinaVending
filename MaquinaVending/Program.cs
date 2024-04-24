@@ -8,14 +8,9 @@ namespace MaquinaVending {
     internal class Program {
         static void Main(string[] args)
         {
-            
-       
+            static List<Producto> productos = new List<Producto>();
 
-
-
-
-
-
+        
 
         int opcion = 0;
             do
@@ -56,7 +51,7 @@ namespace MaquinaVending {
             } while (opcion != 5);
         }
 
-        static void RealizarCompra()
+        static void RealizarCompra(List<Producto> productos)
         {
 
             Console.WriteLine("Compra de Producto:");
@@ -66,35 +61,80 @@ namespace MaquinaVending {
             {
             Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
             }
-
-            Console.Write("Ingrese el ID del producto que desea comprar: ");
-            //
-            Console.Write("Ingrese la cantidad que desea comprar: ");
-            //
-            Console.Write("Ingrese el dinero: ");
-            //
-
             
+            Producto productoComprado = BuscarProducto();
+            if (producto != null)
+            {
+
+                Console.WriteLine("Producto Añadido a la Cesta");
+                Producto producto = new Producto();
+                int PrecioTotal = Producto.PrecioUnitario();
+
+            }
+            else
+            {
+                Console.WriteLine("Producto no encontrado.");
+            }
+
+
+
+
+
+
         }
 
 
         static void SolicitarDetallesProducto()
         {
             Console.WriteLine("Detalles del Producto:");
-            // mostrar lista de productos
-            Console.Write("Ingrese el ID del producto del que desea ver detalles: ");
-            //
+            Console.WriteLine("Productos Disponibles");
+            foreach (var producto in productos)
+            {
+                Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
+            }
 
-            var producto = // metodo que sea buscar producto por id;
+
+            Producto productoBuscado = BuscarProducto();
+           
+             
             if (producto != null)
             {
-                Console.WriteLine();
-                producto.MostrarDetalless();
+                Producto producto = new Producto();
+                Producto.MostarDetalles();
+                
             }
             else
             {
                 Console.WriteLine("Producto no encontrado.");
             }
+        }
+
+
+        public Producto BuscarProducto()
+        {
+            Console.Write("Id del producto: ");
+            string IdBuscar = Console.ReadLine();
+
+
+            Producto ProductoBuscar = null;
+            foreach (Prodcuto c in prodcutos)
+            {
+                if (c.Id == Id)
+                {
+                    ProductoBuscar = c;
+                }
+            }
+
+            if (ProductoBuscar != null)
+            {
+                Console.WriteLine("Contenido encontrado:");
+                Console.WriteLine(ProductoBuscar);
+            }
+            else
+            {
+                Console.WriteLine("No se encontró el producto.");
+            }
+            return ProductoBuscar;
         }
 
 

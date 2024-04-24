@@ -11,7 +11,7 @@ namespace MaquinaVending {
         public bool TieneBateria { get; set; }
         public bool Precargado { get; set; }
 
-
+       
         public ProductoElectronico(int id, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, bool tieneBateria, bool precargado)
         : base(id, nombre, unidades, precioUnitario, descripcion)
         {

@@ -12,7 +12,7 @@ namespace MaquinaVending {
         protected double PrecioUnitario { get; set; }
         protected string Descripcion { get; set; }
 
-       
+        
 
         ´
 
