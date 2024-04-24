@@ -10,11 +10,16 @@ namespace MaquinaVending {
         public string TipoMaterial { get; set; }
         public double Peso { get; set; }
 
-        public MaterialPrecioso(int id, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, double peso)
+        public MaterialesPreciosos(int id, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, double peso)
         : base(id, nombre, unidades, precioUnitario, descripcion)
         {
             TipoMaterial = tipoMaterial;
             Peso = peso;
         }
+        public override string MostrarDetalles()
+        {
+            return base.MostrarDetalles() + $"Tipo de material: {TipoMaterial}, Peso {Peso}";
+        }
+
     }
 }

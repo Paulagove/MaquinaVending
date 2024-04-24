@@ -9,10 +9,15 @@ namespace MaquinaVending {
 
         public string InformacionNutricional { get; set; }
 
-        public ProductoAlimenticio(int id, string nombre, int unidades, double precioUnitario, string descripcion, string informacionNutricional)
+        public ProductosAlimenticios(int id, string nombre, int unidades, double precioUnitario, string descripcion, string informacionNutricional)
         : base(id, nombre, unidades, precioUnitario, descripcion)
         {
             InformacionNutricional = informacionNutricional;
+        }
+
+        public override string MostrarDetalles()
+        {
+            return base.MostrarDetalles() + $"Informacion Nutricional: {InformacionNutricional}";
         }
     }
 }

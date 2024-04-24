@@ -17,7 +17,7 @@ namespace MaquinaVending {
             float sumaMonedas = 0;
             Console.WriteLine("Introduzca las monedas una a una: ");
             do {
-                for (int i = 0; i <= PrecioProducto; i++) {
+                for (int i = 0; i <= ; i++) {
                     moneda = float.Parse(Console.ReadLine());
                     sumaMonedas += moneda;
                 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Admin {
+
         private string Password { get; set; }
         public Admin() { }
         public Admin(string password) {
