@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Program {
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
+            static List<Producto> productos = new List<Producto>();
+
+        
+
+        int opcion = 0;
+            do
+            {
 
 
-            int opcion = 0;
-            do {
+        int opcion = 0;
+            do
+            {
                 Console.WriteLine("--- MÁQUINA DE VENDING ---");
                 Console.WriteLine("1. Comprar Productos");
                 Console.WriteLine("2. Solictitar detalles del producto");
@@ -41,19 +50,15 @@ namespace MaquinaVending {
                         break;
 
                 }
-                Console.WriteLine("Presiona una tecla para continuar");
-                Console.ReadKey();
+        static void RealizarCompra(List<Producto> productos)
+        {
             } while (opcion != 5);
         }
 
-        static void RealizarCompra() {
+        static void RealizarCompra()
+        {
 
             Console.WriteLine("Compra de Producto:");
-
-            Console.WriteLine("Productos disponibles:");
-            foreach (var producto in productos) {
-                Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
-            }
 
             Console.Write("Ingrese el ID del producto que desea comprar: ");
             //
@@ -78,25 +83,77 @@ namespace MaquinaVending {
                 }
             } while (opcionPago != 2);
 
+            
+            Producto productoComprado = BuscarProducto();
+            if (producto != null)
+            {
+            //
+                Console.WriteLine("Producto Añadido a la Cesta");
+                Producto producto = new Producto();
+                int PrecioTotal = Producto.PrecioUnitario();
 
-
-        }
-
-
-        static void SolicitarDetallesProducto() {
-            Console.WriteLine("Detalles del Producto:");
-            // mostrar lista de productos
-            Console.Write("Ingrese el ID del producto del que desea ver detalles: ");
+            }
+            else
+            {
+                Console.WriteLine("Producto no encontrado.");
+            }
+            Console.Write("Ingrese el dinero: ");
             //
 
+            
+        }
+            Console.WriteLine("Productos Disponibles");
+            foreach (var producto in productos)
+            {
+                Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
+            }
+
+
+            Producto productoBuscado = BuscarProducto();
+           
+             
+            if (producto != null)
+            {
+                Producto producto = new Producto();
+                Producto.MostarDetalles();
+                
             var producto = // metodo que sea buscar producto por id;
-            if (producto != null) {
+            if (producto != null)
+            {
                 Console.WriteLine();
-                producto.MostrarDetalles();
+                producto.MostrarDetalless();
             }
             else {
                 Console.WriteLine("Producto no encontrado.");
             }
+        }
+
+
+        public Producto BuscarProducto()
+        {
+            Console.Write("Id del producto: ");
+            string IdBuscar = Console.ReadLine();
+
+
+            Producto ProductoBuscar = null;
+            foreach (Prodcuto c in prodcutos)
+            {
+                if (c.Id == Id)
+                {
+                    ProductoBuscar = c;
+                }
+            }
+
+            if (ProductoBuscar != null)
+            {
+                Console.WriteLine("Contenido encontrado:");
+                Console.WriteLine(ProductoBuscar);
+            }
+            else
+            {
+                Console.WriteLine("No se encontró el producto.");
+            }
+            return ProductoBuscar;
         }
 
     
