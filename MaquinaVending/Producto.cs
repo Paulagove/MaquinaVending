@@ -12,6 +12,9 @@ namespace MaquinaVending {
         public double PrecioUnitario { get; set; }
         protected string Descripcion { get; set; }
 
+       
+
+        ´
 
         public Producto(int id, string nombre, int unidades, double precioUnitario, string descripcion) {
             Id = id;

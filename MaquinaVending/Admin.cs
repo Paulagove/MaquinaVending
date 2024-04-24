@@ -10,9 +10,10 @@ namespace MaquinaVending {
     internal class Admin {
 
         private string Password { get; set; }
-        public Admin() { }
-        public Admin(string password) {
-            Password = password;
+        public List<Producto> Productos { get; set; }
+        public Admin(List<Producto> productos) {
+            Password = "123456";
+            Productos = productos;
         }
 
         public bool LoginAdmin(string password) {
@@ -23,7 +24,7 @@ namespace MaquinaVending {
                 return false;
             }
         }
-        public void CargaIndividual(string password) {
+        public void CargaIndividual() {
             int opcion = 0;
             do {
                 Console.WriteLine("--- Carga individual de productos ---");
@@ -34,10 +35,10 @@ namespace MaquinaVending {
                 opcion = int.Parse(Console.ReadLine());
                 switch (opcion) {
                     case 1:
-                        CargaIndividual();
+                       
                         break;
                     case 2:
-                        CargaCompleta();
+                        
                         break;
                     case 3:
                         Console.WriteLine("Saliendo al menú principal...");
@@ -47,19 +48,31 @@ namespace MaquinaVending {
 
         }
 
-        public void CargaIndividual() {
-        }
-
+       
 
         public void CargaCompleta() {
             //se carga el contenido de la máquina utilizando un archivo
-            string separador = ",";
+            bool contenidoCargado = false;
 
             StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv");
             string header = sr.ReadLine();
-            Console.WriteLine(header);
             string linea = " ";
+            Console.WriteLine(header);
             while ((linea = sr.ReadLine()) != null) {
+                contenidoCargado = true;
+                string[] datos = linea.Split(';');
+                if (datos[0] == "1") {
+                    MaterialesPreciosos mp = new MaterialesPreciosos(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), datos[4], datos[5], int.Parse(datos[6]), int.Parse(datos[7]), datos[8]);
+                    .Add(mp);
+                }
+                else if (datos[0] == "2") {
+                    ProductosAlimenticios pa = new ProductosAlimenticios(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), datos[4], datos[5], int.Parse(datos[6]), datos[7], datos[8]);
+                    .Add(pa);
+                }
+                else if (datos[0] == "3") {
+                    ProductosElectronicos pe = new ProductosElectronicos(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), datos[4], datos[5], int.Parse(datos[6]), datos[7], datos[8]);
+                    .Add(pe);
+                }
 
             }
         }

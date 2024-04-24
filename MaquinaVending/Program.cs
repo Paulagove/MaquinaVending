@@ -6,11 +6,18 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Program {
-        static void Main(string[] args) {
+        static void Main(string[] args)
+        {
+            
+       
 
 
 
-            int opcion = 0;
+
+
+
+
+        int opcion = 0;
             do
             {
                 Console.WriteLine("--- MÁQUINA DE VENDING ---");
@@ -27,19 +34,32 @@ namespace MaquinaVending {
                 {
                     case 1:
                         RealizarCompra();
+<<<<<<< HEAD
                         break;
                     case 2:
                         SolicitarDetallesProducto();
                         break;
                     case 3:
                         
+=======
+                       
+                        break;
+                    case 2:
+                        SolicitarDetallesProducto();
+
+                        break;
+                    case 3:
+                        Admin.CargaIndividual();
+>>>>>>> 4152153f767c5af2b6781af0bd90369237c49f9e
                         break;
                     case 4:
+                        Admin.CargaCompleta();
                         break;
-                    case 5: 
+                    case 5:
+                        Console.WriteLine("Saliendo");
                         break;
 
-                }
+              }
                 Console.WriteLine("Presiona una tecla para continuar");
                 Console.ReadKey();
             } while (opcion != 5);
@@ -47,8 +67,15 @@ namespace MaquinaVending {
 
         static void RealizarCompra()
         {
+
             Console.WriteLine("Compra de Producto:");
-            // enseñar lista de productos
+
+            Console.WriteLine("Productos disponibles:");
+            foreach (var producto in productos)
+            {
+            Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
+            }
+
             Console.Write("Ingrese el ID del producto que desea comprar: ");
             //
             Console.Write("Ingrese la cantidad que desea comprar: ");
@@ -78,6 +105,8 @@ namespace MaquinaVending {
                 Console.WriteLine("Producto no encontrado.");
             }
         }
+
+
 
 
     }
