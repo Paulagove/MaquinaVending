@@ -10,14 +10,11 @@ namespace MaquinaVending {
         {
             static List<Producto> productos = new List<Producto>();
 
-        
 
-        int opcion = 0;
-            do
-            {
+            List<Producto> listaDeLaCompra = new List<Producto>();
 
 
-        int opcion = 0;
+            int opcion = 0;
             do
             {
                 Console.WriteLine("--- MÁQUINA DE VENDING ---");
@@ -30,13 +27,14 @@ namespace MaquinaVending {
                 opcion = int.Parse(Console.ReadLine());
                 Console.Clear();
 
-                switch (opcion) {
+                switch (opcion)
+                {
                     case 1:
                         RealizarCompra();
                         break;
                     case 2:
-                        SolicitarDetallesProducto();
-                        break;                   
+                        //SolicitarDetallesProducto();
+                        break;
                     case 3:
                         Admin admin = new Admin(productos);
                         admin.CargaIndividual();
@@ -50,20 +48,32 @@ namespace MaquinaVending {
                         break;
 
                 }
-        static void RealizarCompra(List<Producto> productos)
-        {
             } while (opcion != 5);
-        }
 
+
+        }
         static void RealizarCompra()
         {
 
-            Console.WriteLine("Compra de Producto:");
+            bool continuidadCompra = 0;
+            do
+            {
+                Console.WriteLine("Compra de Producto:");
+                foreach (var producto in productos)
+                {
+                    Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
+                }
+                Console.Write("Ingrese el ID del producto que desea comprar: ");
+                int id = int.Parse(Console.ReadLine());
+                Console.Write("Ingrese la cantidad que desea comprar: ");
+                int unidades = int.Parse(Console.ReadLine());
+                Console.WriteLine("Quiere Añadir mas productos a la cesta? (true/false)");
+                
+                Producto productoElegido = new Producto(id,unidades); 
 
-            Console.Write("Ingrese el ID del producto que desea comprar: ");
-            //
-            Console.Write("Ingrese la cantidad que desea comprar: ");
-            //
+            } while (continuidadCompra = true);
+
+
             int opcionPago = 0;
             do {
                 Console.WriteLine("Seleccione el método de pago: ");
@@ -101,7 +111,7 @@ namespace MaquinaVending {
             //
 
             
-        }
+        
             Console.WriteLine("Productos Disponibles");
             foreach (var producto in productos)
             {
