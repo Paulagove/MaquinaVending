@@ -22,9 +22,17 @@ namespace MaquinaVending {
 
         public override string MostrarDetalles()
         {
-            return base.MostrarDetalles() + $"Tipo de Material: {TipoMaterial}, Tiene Bateria {TieneBateria}, Viene precargado {Precargado}";
+            return base.MostrarDetalles() + $"\nTipo de Material: {TipoMaterial} - ¿Tiene Bateria? 1.Sí/0.No: {TieneBateria} - ¿Viene precargado? 1.Sí/0.No: {Precargado}";
         }
 
-
+        public override void SolicitarDetalles() {
+            base.SolicitarDetalles();
+            Console.Write("Tipo de material: ");
+            TipoMaterial = Console.ReadLine();
+            Console.Write("¿Tiene batería? 1.Sí ; 0.No: ");
+            TieneBateria = bool.Parse(Console.ReadLine());
+            Console.Write("¿Viene precargado? 1.Sí ; 0.No: ");
+            Precargado = bool.Parse(Console.ReadLine());
+        }
     }
 }

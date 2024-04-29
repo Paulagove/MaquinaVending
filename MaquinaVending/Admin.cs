@@ -49,8 +49,11 @@ namespace MaquinaVending {
 
         }
 
-        public bool AnadirExistencias() { 
-        
+        public void AnadirExistencias() { 
+         foreach(var productos in Productos) {
+                Console.WriteLine(productos);
+            }
+            Console.WriteLine("Indique el producto: ");
 
         }
 

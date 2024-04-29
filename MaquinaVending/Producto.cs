@@ -23,8 +23,17 @@ namespace MaquinaVending {
 
         public virtual string MostrarDetalles()
         {
-            return $"Nombre: {Nombre}, Unidades: {Unidades}, Precio por Unidad: {PrecioUnitario}";
+            return $"Nombre: {Nombre} - Unidades: {Unidades} - Precio por Unidad: {PrecioUnitario} - Descripción: {Descripcion}";
         }
-
+        public virtual void SolicitarDetalles() {
+            Console.Write("Nombre: ");
+            Nombre = Console.ReadLine();
+            Console.Write("Unidades: ");
+            Unidades = int.Parse(Console.ReadLine());
+            Console.Write("Precio por unidad: ");
+            PrecioUnitario = int.Parse(Console.ReadLine());
+            Console.Write("Descripción: ");
+            Descripcion = Console.ReadLine();
+        }
     }
 }
