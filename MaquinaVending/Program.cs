@@ -18,7 +18,7 @@ namespace MaquinaVending {
             do {
                 Console.WriteLine("--- MÁQUINA DE VENDING ---");
                 Console.WriteLine("1. Comprar Productos");
-                Console.WriteLine("2. Solictitar detalles del producto");
+                Console.WriteLine("2. Mostrar detalles del producto");
                 Console.WriteLine("3. Carga individual de producto");
                 Console.WriteLine("4.Carga Completa de los productos");
                 Console.WriteLine("5.Salir");
@@ -31,7 +31,7 @@ namespace MaquinaVending {
                         RealizarCompra();
                         break;
                     case 2:
-                        //SolicitarDetallesProducto();
+                        productos.MostrarDetalles();
                         break;
                     case 3:
                         Admin admin = new Admin(productos);

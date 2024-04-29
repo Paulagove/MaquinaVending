@@ -50,15 +50,61 @@ namespace MaquinaVending {
         }
 
         public void AnadirExistencias() { 
-         foreach(var productos in Productos) {
-                Console.WriteLine(productos);
+         foreach(Producto p in Productos) {
+                Console.WriteLine(p.MostrarDetalles());
             }
-            Console.WriteLine("Indique el producto: ");
+            Console.WriteLine("Indique el producto mediante su ID: ");
+            int id_producto = int.Parse(Console.ReadLine());
+            //llamamos a la función BuscarContenido para eliminarlo
+            Producto productoTemp = BuscarProducto(id_producto);
+            if (p != null) { 
+                Productos.Add(p); //NO ES A´SI
+                Console.WriteLine("Existencias añadidas");
+            }
 
         }
 
-        public bool AnadirNuevosTipos() {
+        public Producto BuscarProducto(int id) {
+            Producto productoTemp = null;
+            foreach (Producto p in Productos) {
+                if (p.Id == id) {
+                    productoTemp = p;
+                }
+            }
+            return productoTemp;
+        }
 
+        public void AnadirNuevosTipos() {
+            int opcion = 0;
+            while (Productos.Count <= 12) {
+                Console.WriteLine("1. Material precioso");
+                Console.WriteLine("2. Producto alimenticio");
+                Console.WriteLine("3. Producto electrónico");
+                Console.Write("Seleccione el tipo de producto que desea añadir: ");
+                opcion = int.Parse(Console.ReadLine());
+                
+                switch(opcion) { 
+                    
+                    case 1:
+                        MaterialesPreciosos mp = new MaterialesPreciosos();
+                        mp.SolicitarDetalles();
+                        Productos.Add(mp);
+                        break;
+                    case 2:
+                        ProductosAlimenticios pa = new ProductosAlimenticios();
+                        pa.SolicitarDetalles();
+                        Productos.Add(pa);
+                        break;
+                    case 3:
+                        ProductosElectronicos pe = new ProductosElectronicos();
+                        pe.SolicitarDetalles();
+                        Productos.Add(pe);
+                        break;
+                }
+                Console.WriteLine("Producto añadido con éxito");
+
+            }
+            Console.WriteLine("No se pueden añadir nuevos tipos de productos. Todos los slots están ocupados");
 
         }
 
