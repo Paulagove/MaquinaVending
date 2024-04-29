@@ -139,8 +139,11 @@ namespace MaquinaVending {
                     else
                     {
                         Console.WriteLine("Producto no encontrado");
+
                     }
-                }
+                    Console.WriteLine("Quiere ver detalles de otro productos. True/False");
+                    continuidadsolicitud = Console.Read();
+                }switch( continuidadsolicitud = true);
             }
 
         }
