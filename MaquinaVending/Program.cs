@@ -11,7 +11,7 @@ namespace MaquinaVending {
             List<Producto> productos = new List<Producto>(12);
 
 
-            List<Producto> listaDeLaCompra = new List<Producto>();
+            
 
 
             int opcion = 0;
@@ -51,6 +51,7 @@ namespace MaquinaVending {
 
         }
         static void RealizarCompra() {
+            List<Producto> listaDeLaCompra = new List<Producto>();
 
             bool continuidadCompra = 0;
             do {
@@ -58,13 +59,16 @@ namespace MaquinaVending {
                 foreach (var producto in productos) {
                     Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
                 }
-                Console.Write("Ingrese el ID del producto que desea comprar: ");
+                Console.WriteLine("Ingrese el ID del producto que desea comprar: ");
                 int id = int.Parse(Console.ReadLine());
-                Console.Write("Ingrese la cantidad que desea comprar: ");
+                Console.WriteLine("Ingrese la cantidad que desea comprar: ");
                 int unidades = int.Parse(Console.ReadLine());
-                Console.WriteLine("Quiere Añadir mas productos a la cesta? (true/false)");
-
                 Producto productoElegido = new Producto(id, unidades);
+                listaDeLaCompra.Add(productoElegido);
+                Console.WriteLine("Producto Añadido a la Cesta");
+
+
+                Console.WriteLine("Quiere Añadir mas productos a la cesta? (true/false)");
 
             } while (continuidadCompra = true);
 
@@ -89,44 +93,7 @@ namespace MaquinaVending {
             } while (opcionPago != 2);
 
 
-            Producto productoComprado = BuscarProducto();
-            if (producto != null) {
-                //
-                Console.WriteLine("Producto Añadido a la Cesta");
-                Producto producto = new Producto();
-                int PrecioTotal = Producto.PrecioUnitario();
 
-            }
-            else {
-                Console.WriteLine("Producto no encontrado.");
-            }
-            Console.Write("Ingrese el dinero: ");
-            //
-
-
-
-            Console.WriteLine("Productos Disponibles");
-            foreach (var producto in productos) {
-                Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
-            }
-
-
-            Producto productoBuscado = BuscarProducto();
-
-
-            if (producto != null) {
-                Producto producto = new Producto();
-                Producto.MostarDetalles();
-
-                var producto = // metodo que sea buscar producto por id;
-            if (producto != null) {
-                    Console.WriteLine();
-                    producto.MostrarDetalless();
-                }
-                else {
-                    Console.WriteLine("Producto no encontrado.");
-                }
-            }
 
 
             public Producto BuscarProducto() {
