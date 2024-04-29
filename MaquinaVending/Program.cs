@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -96,7 +97,7 @@ namespace MaquinaVending {
 
 
 
-            public Producto BuscarProducto() {
+            static Producto BuscarProducto() {
                 Console.Write("Id del producto: ");
                 string IdBuscar = Console.ReadLine();
 
@@ -109,17 +110,38 @@ namespace MaquinaVending {
                 }
 
                 if (ProductoBuscar != null) {
-                    Console.WriteLine("Contenido encontrado:");
+                    
                     Console.WriteLine(ProductoBuscar);
                 }
                 else {
-                    Console.WriteLine("No se encontró el producto.");
+                    Console.WriteLine(".");
                 }
                 return ProductoBuscar;
             }
 
 
+            public void SolicitarDetallesDeProducto()
+            {
+                bool continuidadsolicitud = 0;
+                do
+                {
+                    foreach (var producto in productos)
+                    {
+                        Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} ");
+                    }
+                    
+                    Producto productoSolicitado = BuscarProducto();
 
+                    if (productoSolicitado != null)
+                    {
+                        Console.WriteLine(productoSolicitado.MostrarDetalles);
+                    }
+                    else
+                    {
+                        Console.WriteLine("Producto no encontrado");
+                    }
+                }
+            }
 
         }
     }
