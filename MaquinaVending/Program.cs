@@ -6,17 +6,16 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Program {
-        static void Main(string[] args)
-        {
-            static List<Producto> productos = new List<Producto>();
+      
+        static void Main(string[] args) {
+            List<Producto> productos = new List<Producto>(12);
 
 
             List<Producto> listaDeLaCompra = new List<Producto>();
 
 
             int opcion = 0;
-            do
-            {
+            do {
                 Console.WriteLine("--- MÁQUINA DE VENDING ---");
                 Console.WriteLine("1. Comprar Productos");
                 Console.WriteLine("2. Solictitar detalles del producto");
@@ -27,8 +26,7 @@ namespace MaquinaVending {
                 opcion = int.Parse(Console.ReadLine());
                 Console.Clear();
 
-                switch (opcion)
-                {
+                switch (opcion) {
                     case 1:
                         RealizarCompra();
                         break;
@@ -40,8 +38,8 @@ namespace MaquinaVending {
                         admin.CargaIndividual();
                         break;
                     case 4:
-                        Admin admin = new Admin(productos);
-                        admin.CargaCompleta();
+                        Admin admin2 = new Admin(productos);
+                        admin2.CargaCompleta();
                         break;
                     case 5:
                         Console.WriteLine("Saliendo...");
@@ -52,15 +50,12 @@ namespace MaquinaVending {
 
 
         }
-        static void RealizarCompra()
-        {
+        static void RealizarCompra() {
 
             bool continuidadCompra = 0;
-            do
-            {
+            do {
                 Console.WriteLine("Compra de Producto:");
-                foreach (var producto in productos)
-                {
+                foreach (var producto in productos) {
                     Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
                 }
                 Console.Write("Ingrese el ID del producto que desea comprar: ");
@@ -68,8 +63,8 @@ namespace MaquinaVending {
                 Console.Write("Ingrese la cantidad que desea comprar: ");
                 int unidades = int.Parse(Console.ReadLine());
                 Console.WriteLine("Quiere Añadir mas productos a la cesta? (true/false)");
-                
-                Producto productoElegido = new Producto(id,unidades); 
+
+                Producto productoElegido = new Producto(id, unidades);
 
             } while (continuidadCompra = true);
 
@@ -93,81 +88,72 @@ namespace MaquinaVending {
                 }
             } while (opcionPago != 2);
 
-            
+
             Producto productoComprado = BuscarProducto();
-            if (producto != null)
-            {
-            //
+            if (producto != null) {
+                //
                 Console.WriteLine("Producto Añadido a la Cesta");
                 Producto producto = new Producto();
                 int PrecioTotal = Producto.PrecioUnitario();
 
             }
-            else
-            {
+            else {
                 Console.WriteLine("Producto no encontrado.");
             }
             Console.Write("Ingrese el dinero: ");
             //
 
-            
-        
+
+
             Console.WriteLine("Productos Disponibles");
-            foreach (var producto in productos)
-            {
+            foreach (var producto in productos) {
                 Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
             }
 
 
             Producto productoBuscado = BuscarProducto();
-           
-             
-            if (producto != null)
-            {
+
+
+            if (producto != null) {
                 Producto producto = new Producto();
                 Producto.MostarDetalles();
-                
-            var producto = // metodo que sea buscar producto por id;
-            if (producto != null)
-            {
-                Console.WriteLine();
-                producto.MostrarDetalless();
-            }
-            else {
-                Console.WriteLine("Producto no encontrado.");
-            }
-        }
 
-
-        public Producto BuscarProducto()
-        {
-            Console.Write("Id del producto: ");
-            string IdBuscar = Console.ReadLine();
-
-
-            Producto ProductoBuscar = null;
-            foreach (Prodcuto c in prodcutos)
-            {
-                if (c.Id == Id)
-                {
-                    ProductoBuscar = c;
+                var producto = // metodo que sea buscar producto por id;
+            if (producto != null) {
+                    Console.WriteLine();
+                    producto.MostrarDetalless();
+                }
+                else {
+                    Console.WriteLine("Producto no encontrado.");
                 }
             }
 
-            if (ProductoBuscar != null)
-            {
-                Console.WriteLine("Contenido encontrado:");
-                Console.WriteLine(ProductoBuscar);
+
+            public Producto BuscarProducto() {
+                Console.Write("Id del producto: ");
+                string IdBuscar = Console.ReadLine();
+
+
+                Producto ProductoBuscar = null;
+                foreach (Prodcuto c in prodcutos) {
+                    if (c.Id == Id) {
+                        ProductoBuscar = c;
+                    }
+                }
+
+                if (ProductoBuscar != null) {
+                    Console.WriteLine("Contenido encontrado:");
+                    Console.WriteLine(ProductoBuscar);
+                }
+                else {
+                    Console.WriteLine("No se encontró el producto.");
+                }
+                return ProductoBuscar;
             }
-            else
-            {
-                Console.WriteLine("No se encontró el producto.");
-            }
-            return ProductoBuscar;
+
+
+
+
         }
-
-    
-
-
     }
 }

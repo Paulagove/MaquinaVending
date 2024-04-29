@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -35,10 +36,10 @@ namespace MaquinaVending {
                 opcion = int.Parse(Console.ReadLine());
                 switch (opcion) {
                     case 1:
-                       
+                        AnadirExistencias();
                         break;
                     case 2:
-                        
+                        AnadirNuevosTipos();
                         break;
                     case 3:
                         Console.WriteLine("Saliendo al menú principal...");
@@ -48,35 +49,59 @@ namespace MaquinaVending {
 
         }
 
-       
+        public bool AnadirExistencias() { 
+        
 
-        public void CargaCompleta() {
+        }
+
+        public bool AnadirNuevosTipos() {
+
+
+        }
+
+
+
+        public bool CargaCompleta() {
             //se carga el contenido de la máquina utilizando un archivo
-            bool contenidoCargado = false;
+            bool productosCargados = false;
+            try {
+                if (File.Exists("example_vending_file_practical_work_i.csv")) {
+                    StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv");
+                    string header = sr.ReadLine();
+                    string linea;
+                    Console.WriteLine(header);
+                    while ((linea = sr.ReadLine()) != null) {
+                        productosCargados = true;
+                        string[] datos = linea.Split(';');
+                        if (datos[0] == "1") {
+                            MaterialesPreciosos mp = new MaterialesPreciosos(int.Parse(datos[0]), datos[1], int.Parse(datos[2]), double.Parse(datos[3]), datos[4], datos[5], double.Parse(datos[6]));
+                            Productos.Add(mp);
+                        }
+                        else if (datos[0] == "2") {
+                            ProductosAlimenticios pa = new ProductosAlimenticios(int.Parse(datos[0]), datos[1], int.Parse(datos[2]), double.Parse(datos[3]), datos[4], datos[5]);
+                            Productos.Add(pa);
+                        }
+                        else if (datos[0] == "3") {
+                            ProductosElectronicos pe = new ProductosElectronicos(int.Parse(datos[0]), datos[1], int.Parse(datos[2]), double.Parse(datos[3]), datos[4], datos[5], bool.Parse(datos[6]), bool.Parse(datos[7]));
+                            Productos.Add(pe);
+                        }
 
-            StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv");
-            string header = sr.ReadLine();
-            string linea = " ";
-            Console.WriteLine(header);
-            while ((linea = sr.ReadLine()) != null) {
-                contenidoCargado = true;
-                string[] datos = linea.Split(';');
-                if (datos[0] == "1") {
-                    MaterialesPreciosos mp = new MaterialesPreciosos(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), datos[4], datos[5], int.Parse(datos[6]), int.Parse(datos[7]), datos[8]);
-                    .Add(mp);
+                    }
                 }
-                else if (datos[0] == "2") {
-                    ProductosAlimenticios pa = new ProductosAlimenticios(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), datos[4], datos[5], int.Parse(datos[6]), datos[7], datos[8]);
-                    .Add(pa);
+                else {
+                    File.Create("productos.txt").Close();
                 }
-                else if (datos[0] == "3") {
-                    ProductosElectronicos pe = new ProductosElectronicos(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), datos[4], datos[5], int.Parse(datos[6]), datos[7], datos[8]);
-                    .Add(pe);
-                }
-
             }
+            catch (FileNotFoundException ex) {
+                Console.WriteLine("No se encuentra el archivo de contenidos: " + ex.Message);
+            }
+            catch (IOException ex) {
+                Console.WriteLine("Error de E/S: " + ex.Message);
+            }
+            return productosCargados;
         }
     }
+
 }
 
 
