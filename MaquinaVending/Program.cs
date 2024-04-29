@@ -7,13 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Program {
-      
+
         static void Main(string[] args) {
             List<Producto> productos = new List<Producto>(12);
-
-
-            
-
 
             int opcion = 0;
             do {
@@ -48,16 +44,15 @@ namespace MaquinaVending {
 
                 }
             } while (opcion != 5);
-
-
         }
+
         static void RealizarCompra() {
             List<Producto> listaDeLaCompra = new List<Producto>();
 
-            bool continuidadCompra = 0;
+            bool continuidadCompra = false;
             do {
                 Console.WriteLine("Compra de Producto:");
-                foreach (var producto in productos) {
+                foreach (Producto p in productos) {
                     Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
                 }
                 Console.WriteLine("Ingrese el ID del producto que desea comprar: ");
@@ -71,7 +66,7 @@ namespace MaquinaVending {
 
                 Console.WriteLine("Quiere Añadir mas productos a la cesta? (true/false)");
 
-            } while (continuidadCompra = true);
+            } while (continuidadCompra == true);
 
 
             int opcionPago = 0;
@@ -83,69 +78,60 @@ namespace MaquinaVending {
 
                 switch (opcionPago) {
                     case 1:
-                        Pago pagoEf = new Pago();
+                        Pago pagoEf = new Pago(listaDeLaCompra);
                         pagoEf.PagoEfectivo();
                         break;
                     case 2:
-                        Pago pagoTar = new Pago();
+                        Pago pagoTar = new Pago(listaDeLaCompra);
                         pagoTar.PagoTarjeta();
                         break;
                 }
             } while (opcionPago != 2);
 
+        }
+
+        static Producto BuscarProducto() {
+            Console.Write("Id del producto: ");
+            string idBuscar = Console.ReadLine();
+
+            Producto ProductoBuscar = null;
+            foreach (Producto p in productos) {
+                if (p.Id == idBuscar) {
+                    ProductoBuscar = p;
+                }
+            }
+
+            if (ProductoBuscar != null) {
+
+                Console.WriteLine(ProductoBuscar);
+            }
+            else {
+                Console.WriteLine(".");
+            }
+            return ProductoBuscar;
+        }
 
 
-
-
-            static Producto BuscarProducto() {
-                Console.Write("Id del producto: ");
-                string IdBuscar = Console.ReadLine();
-
-
-                Producto ProductoBuscar = null;
-                foreach (Prodcuto c in prodcutos) {
-                    if (c.Id == Id) {
-                        ProductoBuscar = c;
-                    }
+        public void SolicitarDetallesDeProducto() {
+            bool continuidadsolicitud = false;
+            do {
+                foreach (var producto in productos) {
+                    Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} ");
                 }
 
-                if (ProductoBuscar != null) {
-                    
-                    Console.WriteLine(ProductoBuscar);
+                Producto productoSolicitado = BuscarProducto();
+
+                if (productoSolicitado != null) {
+                    Console.WriteLine(productoSolicitado.MostrarDetalles);
                 }
                 else {
-                    Console.WriteLine(".");
+                    Console.WriteLine("Producto no encontrado");
+
                 }
-                return ProductoBuscar;
-            }
-
-
-            public void SolicitarDetallesDeProducto()
-            {
-                bool continuidadsolicitud = 0;
-                do
-                {
-                    foreach (var producto in productos)
-                    {
-                        Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} ");
-                    }
-                    
-                    Producto productoSolicitado = BuscarProducto();
-
-                    if (productoSolicitado != null)
-                    {
-                        Console.WriteLine(productoSolicitado.MostrarDetalles);
-                    }
-                    else
-                    {
-                        Console.WriteLine("Producto no encontrado");
-
-                    }
-                    Console.WriteLine("Quiere ver detalles de otro productos. True/False");
-                    continuidadsolicitud = Console.Read();
-                }switch( continuidadsolicitud = true);
-            }
-
+                Console.WriteLine("Quiere ver detalles de otro productos. True/False");
+                continuidadsolicitud = bool.Parse(Console.ReadLine());
+            }while (continuidadsolicitud == true);
         }
+
     }
 }
