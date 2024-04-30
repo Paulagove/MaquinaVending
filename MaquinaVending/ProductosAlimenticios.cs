@@ -16,7 +16,7 @@ namespace MaquinaVending {
         }
 
 
-        public ProductosAlimenticios(int id, string tipoProducto, string nombre, int unidades,double precioUnitario, string descripcion, string informacionNutricional)
+        public ProductosAlimenticios(int id, string tipoProducto, string nombre, int unidades, float precioUnitario, string descripcion, string informacionNutricional)
         : base(id, tipoProducto, nombre, unidades, precioUnitario, descripcion) {
             InformacionNutricional = informacionNutricional;
             TipoProducto = "Producto alimenticio";
@@ -31,6 +31,6 @@ namespace MaquinaVending {
             Console.Write("Información nutricional: ");
             InformacionNutricional = Console.ReadLine();
         }
-        
+
     }
 }
