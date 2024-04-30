@@ -10,7 +10,7 @@ namespace MaquinaVending {
         public string TipoMaterial { get; set; }
         public double Peso { get; set; }
 
-      
+      public MaterialesPreciosos() { }
 
 
         public MaterialesPreciosos(int id, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, double peso)

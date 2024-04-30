@@ -8,7 +8,7 @@ namespace MaquinaVending {
     internal class ProductosAlimenticios : Producto {
 
         public string InformacionNutricional { get; set; }
-
+        public ProductosAlimenticios() { }
 
 
         public ProductosAlimenticios(int id, string nombre, int unidades, double precioUnitario, string descripcion, string informacionNutricional)

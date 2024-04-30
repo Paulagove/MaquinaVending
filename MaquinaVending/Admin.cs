@@ -50,14 +50,15 @@ namespace MaquinaVending {
         }
 
         public void AnadirExistencias() { 
+            //añadir las unidades que él quiera
          foreach(Producto p in Productos) {
                 Console.WriteLine(p.MostrarDetalles());
             }
             Console.WriteLine("Indique el producto mediante su ID: ");
             int id_producto = int.Parse(Console.ReadLine());
-            //llamamos a la función BuscarContenido para eliminarlo
+
             Producto productoTemp = BuscarProducto(id_producto);
-            if (p != null) { 
+            if (p != null) {
                 Productos.Add(p); //NO ES A´SI
                 Console.WriteLine("Existencias añadidas");
             }
@@ -86,6 +87,7 @@ namespace MaquinaVending {
                 switch(opcion) { 
                     
                     case 1:
+                     
                         MaterialesPreciosos mp = new MaterialesPreciosos();
                         mp.SolicitarDetalles();
                         Productos.Add(mp);
