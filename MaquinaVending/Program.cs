@@ -7,14 +7,18 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Program {
-        static List<Producto> productos = new List<Producto>(12);
+        static List<Producto> Productos = new List<Producto>(12);
 
         static void Main(string[] args) {
-            Admin admin = new Admin(productos);
+          
+            Admin admin = new Admin(Productos);
+            
+           
+
             string password;
             int opcion = 0;
             do {
-                Console.WriteLine("--- MÁQUINA DE VENDING ---");
+                Console.WriteLine("---- MÁQUINA DE VENDING ----");
                 Console.WriteLine("1. Comprar Productos");
                 Console.WriteLine("2. Mostrar detalles del producto");
                 Console.WriteLine("3. Carga individual de producto");
@@ -58,7 +62,6 @@ namespace MaquinaVending {
                         break;
                     case 5:
                         Console.WriteLine("Saliendo...");
-                        Console.Clear();
                         break;
 
                 }
@@ -68,63 +71,74 @@ namespace MaquinaVending {
 
         static void RealizarCompra() {
             List<Producto> listaDeLaCompra = new List<Producto>();
-            
+
 
             Producto productoElegido = null;
             bool continuidadCompra = false;
             do {
-                Console.WriteLine("Compra de Producto:");
+                Console.Clear();
+                Console.WriteLine(" +++ REALIZAR COMPRA +++ ");
                 foreach (Producto producto in Productos) {
-                    Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
+                    Console.WriteLine($"({producto.Id})|Nombre: {producto.Nombre} | Precio: {producto.PrecioUnitario} | Unidades disponibles: {producto.Unidades}");
                 }
                 Console.Write("Ingrese el ID del producto que desea comprar: ");
                 int id = int.Parse(Console.ReadLine());
                 Console.Write("Ingrese la cantidad que desea comprar: ");
                 int unidades = int.Parse(Console.ReadLine());
 
-                //hacer foreach comparando
-                foreach(Producto p in Productos) {
-                    if(p.Id == id && p.Unidades >= unidades) {
+
+                foreach (Producto p in Productos) {
+                    if (p.Id == id && p.Unidades >= unidades) {
                         productoElegido = p;
                     }
+                    else if (p.Unidades < unidades) {
+                        Console.WriteLine("No quedan unidades del producto seleccionado");
+                    }
                 }
-                listaDeLaCompra.Add(productoElegido);
-                Console.WriteLine("Producto Añadido a la Cesta");
-                Productos.Remove(productoElegido);
-                Console.Write("Quiere Añadir mas productos a la cesta? (1.Sí/2.No): ");
+
+                if (productoElegido != null && productoElegido.Unidades >= unidades) {
+                    productoElegido.Unidades -= unidades;
+                    listaDeLaCompra.Add(productoElegido);
+                    Console.WriteLine($"Producto Añadido a la Cesta");
+                }
+                Console.Write("Quiere añadir más productos a la cesta? (true = Sí / false = No): ");
                 continuidadCompra = bool.Parse(Console.ReadLine());
 
             } while (continuidadCompra == true);
 
-
-            int opcionPago = 0;
-            do {
-                Console.WriteLine("1. Pago en efectivo");
-                Console.WriteLine("2. Pago con tarjeta");
-                Console.Write("Seleccione el método de pago: ");
-                opcionPago = int.Parse(Console.ReadLine());
-
-                switch (opcionPago) {
-                    case 1:
-                        //intentar reducir
-                        Pago pagoEf = new Pago(listaDeLaCompra);
-                        pagoEf.PagoEfectivo(listaDeLaCompra);
-                        break;
-                    case 2:
-                        Pago pagoTar = new Pago(listaDeLaCompra);
-                        pagoTar.PagoTarjeta(listaDeLaCompra);
-                        break;
+            if (listaDeLaCompra.Count > 0) {
+                int opcionPago = 0;
+                if (listaDeLaCompra.Count > 0) {
+                    Console.WriteLine("1. Pago en efectivo");
+                    Console.WriteLine("2. Pago con tarjeta");
+                    Console.Write("Seleccione el método de pago: ");
+                    opcionPago = int.Parse(Console.ReadLine());
+                    Pago pago = new Pago(listaDeLaCompra);
+                    switch (opcionPago) {
+                        case 1:
+                            pago.PagoEfectivo(listaDeLaCompra);                      
+                            break;
+                        case 2:
+                            pago.PagoTarjeta(listaDeLaCompra);                       
+                            break;
+                        default:
+                            Console.WriteLine("Opción de pago no válida.");
+                            break;
+                    }
                 }
-            } while (opcionPago != 2);
-
+                else {
+                    Console.WriteLine("No hay ningún producto en la lista de la compra.");
+                }
+                Console.ReadKey();
+            }
         }
 
         static Producto BuscarProducto() {
-            Console.Write("Id del producto: ");
+            Console.Write("ID del producto: ");
             int idBuscar = int.Parse(Console.ReadLine());
 
             Producto ProductoBuscar = null;
-            foreach (Producto p in productos) {
+            foreach (Producto p in Productos) {
                 if (p.Id == idBuscar) {
                     ProductoBuscar = p;
                 }
@@ -134,18 +148,16 @@ namespace MaquinaVending {
 
                 Console.WriteLine(ProductoBuscar);
             }
-            else {
-                Console.WriteLine(".");
-            }
             return ProductoBuscar;
         }
 
 
         static void MostrarDetallesDeProducto() {
+            Console.WriteLine("+++ MOSTRAR DETALLES DE LOS PRODUCTOS +++");
             bool continuidadsolicitud = false;
             do {
-                foreach (var producto in productos) {
-                    Console.WriteLine($"ID: {producto.Id} - Nombre:{producto.Nombre}, Descripcion {producto.Descripcion}, Cantidad {producto.Unidades} ");
+                foreach (var producto in Productos) {
+                    Console.WriteLine($"({producto.Id})|Nombre: {producto.Nombre} | Descripción: {producto.Descripcion} | Unidades: {producto.Unidades}");
                 }
 
                 Producto productoSolicitado = BuscarProducto();
@@ -155,9 +167,8 @@ namespace MaquinaVending {
                 }
                 else {
                     Console.WriteLine("Producto no encontrado");
-
                 }
-                Console.Write("Quiere ver detalles de otro productos (1.Sí/2.No): ");
+                Console.Write("¿Desea ver detalles de otro productos? (true = Sí / false = No): ");
                 continuidadsolicitud = bool.Parse(Console.ReadLine());
             }while (continuidadsolicitud == true);
         }

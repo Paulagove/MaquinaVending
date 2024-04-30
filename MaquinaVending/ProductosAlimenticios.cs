@@ -16,13 +16,14 @@ namespace MaquinaVending {
         }
 
 
-        public ProductosAlimenticios(int id, string nombre, int unidades, double precioUnitario, string descripcion, string informacionNutricional)
-        : base(id, nombre, unidades, precioUnitario, descripcion) {
+        public ProductosAlimenticios(int id, string tipoProducto, string nombre, int unidades,double precioUnitario, string descripcion, string informacionNutricional)
+        : base(id, tipoProducto, nombre, unidades, precioUnitario, descripcion) {
             InformacionNutricional = informacionNutricional;
+            TipoProducto = "Producto alimenticio";
         }
 
         public override string MostrarDetalles() {
-            return base.MostrarDetalles() + $" - Informacion Nutricional: {InformacionNutricional}";
+            return base.MostrarDetalles() + $" | Informacion Nutricional: {InformacionNutricional}";
         }
 
         public override void SolicitarDetalles() {
@@ -30,15 +31,6 @@ namespace MaquinaVending {
             Console.Write("Información nutricional: ");
             InformacionNutricional = Console.ReadLine();
         }
-        public override void ToFile() {
-            try {
-                StreamWriter sw = new StreamWriter("maquinavending.txt", true);
-                sw.WriteLine($"({Id})|Producto Alimenticio|{Nombre}|{Unidades}|{PrecioUnitario}|{Descripcion}|{InformacionNutricional}");
-                sw.Close();
-            }
-            catch (FileNotFoundException ex) {
-                Console.WriteLine("No se encuentra el archivo de películas: " + ex.Message);
-            }
-        }
+        
     }
 }

@@ -17,15 +17,16 @@ namespace MaquinaVending {
             Id = count + 1;
         }
 
-        public MaterialesPreciosos(int id, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, double peso)
-        : base(id, nombre, unidades, precioUnitario, descripcion)
+        public MaterialesPreciosos(int id, string tipoProducto, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, double peso)
+        : base(id, tipoProducto, nombre, unidades, precioUnitario, descripcion)
         {
             TipoMaterial = tipoMaterial;
             Peso = peso;
+            TipoProducto = "Material Precioso";
         }
         public override string MostrarDetalles()
         {
-            return base.MostrarDetalles() + $"Tipo de material: {TipoMaterial}, Peso {Peso}";
+            return base.MostrarDetalles() + $" | Tipo de material: {TipoMaterial} | Peso: {Peso}";
         }
         public override void SolicitarDetalles() {
             base.SolicitarDetalles();
@@ -34,15 +35,6 @@ namespace MaquinaVending {
             Console.Write("Peso: ");
             Peso = int.Parse(Console.ReadLine());
         }
-        public override void ToFile() {
-            try {
-                StreamWriter sw = new StreamWriter("maquinavending.txt", true);
-                sw.WriteLine($"({Id})|Material Precioso|{Nombre}|{Unidades}|{PrecioUnitario}|{Descripcion}|{TipoMaterial}|{Peso}");
-                sw.Close();
-            }
-            catch (FileNotFoundException ex) {
-                Console.WriteLine("No se encuentra el archivo de películas: " + ex.Message);
-            }
-        }
+        
     }
 }

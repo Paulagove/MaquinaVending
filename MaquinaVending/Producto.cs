@@ -7,27 +7,32 @@ using System.Threading.Tasks;
 namespace MaquinaVending {
     internal abstract class Producto {
         public int Id { get; protected set; }
+        public string TipoProducto { get; set; }
         public string Nombre { get; set; }
         public int Unidades { get; set; }
         public double PrecioUnitario { get; set; }
         public string Descripcion { get; set; }
+       
 
         public Producto() { }
 
         public Producto(int id) {
             Id = id;
         }
-        public Producto(int id, string nombre, int unidades, double precioUnitario, string descripcion) {
+        public Producto(int id, string tipoProducto, string nombre, int unidades, double precioUnitario, string descripcion) {
             Id = id;
+            TipoProducto = tipoProducto;
             Nombre = nombre;
             Unidades = unidades;
             PrecioUnitario = precioUnitario;
             Descripcion = descripcion;
+
+            
         }
 
         public virtual string MostrarDetalles()
         {
-            return $"({Id}) Nombre: {Nombre} - Unidades: {Unidades} - Precio por Unidad: {PrecioUnitario} - Descripción: {Descripcion}";
+            return $"({Id})| Nombre: {Nombre} | Unidades: {Unidades} | Precio/unidad: {PrecioUnitario} | Descripción: {Descripcion}";
         }
         public virtual void SolicitarDetalles() {
             Console.Write("Nombre: ");
@@ -35,10 +40,9 @@ namespace MaquinaVending {
             Console.Write("Unidades: ");
             Unidades = int.Parse(Console.ReadLine());
             Console.Write("Precio por unidad: ");
-            PrecioUnitario = int.Parse(Console.ReadLine());
+            PrecioUnitario = double.Parse(Console.ReadLine());
             Console.Write("Descripción: ");
             Descripcion = Console.ReadLine();
         }
-        public abstract void ToFile();
     }
 }

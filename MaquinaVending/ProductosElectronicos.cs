@@ -18,38 +18,30 @@ namespace MaquinaVending {
             Id = count + 1;
         }
 
-        public ProductosElectronicos(int id, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, bool tieneBateria, bool precargado)
-        : base(id, nombre, unidades, precioUnitario, descripcion)
+        public ProductosElectronicos(int id, string tipoProducto, string nombre, int unidades, double precioUnitario, string descripcion, string tipoMaterial, bool tieneBateria, bool precargado)
+        : base(id, tipoProducto, nombre, unidades, precioUnitario, descripcion)
         {
             TipoMaterial = tipoMaterial;
             TieneBateria = tieneBateria;
             Precargado = precargado;
+            TipoProducto = "Producto electrónico";
         }
 
         public override string MostrarDetalles()
         {
-            return base.MostrarDetalles() + $"\nTipo de Material: {TipoMaterial} - ¿Tiene Bateria? (True = Sí ; False = No): {TieneBateria} - ¿Viene precargado? (True = Sí ; False = No): {Precargado}";
+            return base.MostrarDetalles() + $"\n| Tipo de Material: {TipoMaterial} | ¿Tiene Bateria? (true = Sí / false = No): {TieneBateria} | ¿Viene precargado? (true = Sí / false = No): {Precargado}";
         }
 
         public override void SolicitarDetalles() {
             base.SolicitarDetalles();
             Console.Write("Tipo de material: ");
             TipoMaterial = Console.ReadLine();
-            Console.Write("¿Tiene batería? (True = Sí ; False = No): ");
+            Console.Write("¿Tiene batería? (true = Sí / false = No): ");
             TieneBateria = bool.Parse(Console.ReadLine());
-            Console.Write("¿Viene precargado? (True = Sí ; False = No): ");
+            Console.Write("¿Viene precargado? (true = Sí / false = No): ");
             Precargado = bool.Parse(Console.ReadLine());
         }
 
-        public override void ToFile() {
-            try {
-                StreamWriter sw = new StreamWriter("maquinavending.txt", true);
-                sw.WriteLine($"({Id})|Producto Electrónico|{Nombre}|{Unidades}|{PrecioUnitario}|{Descripcion}|{TipoMaterial}|{TieneBateria}");
-                sw.Close();
-            }
-            catch (FileNotFoundException ex) {
-                Console.WriteLine("No se encuentra el archivo de películas: " + ex.Message);
-            }
-        }
+       
     }
 }
