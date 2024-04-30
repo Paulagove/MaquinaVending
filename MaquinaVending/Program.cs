@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace MaquinaVending {
     internal class Program {
+        static List<Producto> productos = new List<Producto>(12);
 
         static void Main(string[] args) {
-            List<Producto> productos = new List<Producto>(12);
 
             int opcion = 0;
             do {
@@ -28,7 +28,8 @@ namespace MaquinaVending {
                         RealizarCompra();
                         break;
                     case 2:
-                        productos.MostrarDetalles();
+                        //primero se muestran todos y luego se especifican
+                        p.MostrarDetalles(productos);
                         break;
                     case 3:
                         Admin admin = new Admin(productos);
@@ -48,23 +49,29 @@ namespace MaquinaVending {
 
         static void RealizarCompra() {
             List<Producto> listaDeLaCompra = new List<Producto>();
-
+            Producto productoElegido = null;
             bool continuidadCompra = false;
             do {
                 Console.WriteLine("Compra de Producto:");
                 foreach (Producto p in productos) {
-                    Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
+                    Console.WriteLine($"ID: {p.Id} - {p.Nombre} - Precio: {p.PrecioUnitario} - Unidades disponibles: {p.Unidades}");
                 }
                 Console.WriteLine("Ingrese el ID del producto que desea comprar: ");
                 int id = int.Parse(Console.ReadLine());
                 Console.WriteLine("Ingrese la cantidad que desea comprar: ");
                 int unidades = int.Parse(Console.ReadLine());
-                Producto productoElegido = new Producto(id, unidades);
+
+                //hacer foreach comparando
+                foreach(Producto p in productos) {
+                    if(p.Id == id && p.Unidades >= unidades) {
+                        productoElegido = p;
+                    }
+                }
                 listaDeLaCompra.Add(productoElegido);
                 Console.WriteLine("Producto Añadido a la Cesta");
 
-
-                Console.WriteLine("Quiere Añadir mas productos a la cesta? (true/false)");
+                Console.Write("Quiere Añadir mas productos a la cesta? (1.Sí/2.No): ");
+                continuidadCompra = bool.Parse(Console.ReadLine());
 
             } while (continuidadCompra == true);
 
@@ -78,12 +85,13 @@ namespace MaquinaVending {
 
                 switch (opcionPago) {
                     case 1:
+                        //intentar reducir
                         Pago pagoEf = new Pago(listaDeLaCompra);
-                        pagoEf.PagoEfectivo();
+                        pagoEf.PagoEfectivo(listaDeLaCompra);
                         break;
                     case 2:
                         Pago pagoTar = new Pago(listaDeLaCompra);
-                        pagoTar.PagoTarjeta();
+                        pagoTar.PagoTarjeta(listaDeLaCompra);
                         break;
                 }
             } while (opcionPago != 2);
@@ -92,7 +100,7 @@ namespace MaquinaVending {
 
         static Producto BuscarProducto() {
             Console.Write("Id del producto: ");
-            string idBuscar = Console.ReadLine();
+            int idBuscar = int.Parse(Console.ReadLine());
 
             Producto ProductoBuscar = null;
             foreach (Producto p in productos) {
@@ -122,13 +130,13 @@ namespace MaquinaVending {
                 Producto productoSolicitado = BuscarProducto();
 
                 if (productoSolicitado != null) {
-                    Console.WriteLine(productoSolicitado.MostrarDetalles);
+                    Console.WriteLine(productoSolicitado.MostrarDetalles());
                 }
                 else {
                     Console.WriteLine("Producto no encontrado");
 
                 }
-                Console.WriteLine("Quiere ver detalles de otro productos. True/False");
+                Console.Write("Quiere ver detalles de otro productos (1.Sí/2.No): ");
                 continuidadsolicitud = bool.Parse(Console.ReadLine());
             }while (continuidadsolicitud == true);
         }
