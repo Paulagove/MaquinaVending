@@ -83,6 +83,7 @@ namespace MaquinaVending {
 
         public void AnadirNuevosTipos() {
             int opcion = 0;
+            s
 
             Console.WriteLine(" --- Añadir nuevos tipos de productos ---");
             Console.WriteLine("1. Material precioso");
@@ -127,6 +128,7 @@ namespace MaquinaVending {
         public bool CargaCompleta() {
             //se carga el contenido de la máquina utilizando un archivo
             bool productosCargados = false;
+            
             try {
                 if (File.Exists("example_vending_file_practical_work_i.csv")) {
                     StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv"); 
