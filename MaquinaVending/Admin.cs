@@ -50,30 +50,24 @@ namespace MaquinaVending {
         }
 
         public void AnadirExistencias() { 
-            //añadir las unidades que él quiera
+            
          foreach(Producto p in Productos) {
                 Console.WriteLine(p.MostrarDetalles());
             }
-            Console.WriteLine("Indique el producto mediante su ID: ");
+            Console.Write("Indique el producto que quiera añadir mediante su ID: ");
             int id_producto = int.Parse(Console.ReadLine());
+            Console.Write("Introduzca el número de unidades que desea añadir: ");
+            int unidades_producto = int.Parse(Console.ReadLine());
 
-            Producto productoTemp = BuscarProducto(id_producto);
-            if (p != null) {
-                Productos.Add(p); //NO ES A´SI
-                Console.WriteLine("Existencias añadidas");
-            }
-
-        }
-
-        public Producto BuscarProducto(int id) {
-            Producto productoTemp = null;
             foreach (Producto p in Productos) {
-                if (p.Id == id) {
-                    productoTemp = p;
+                if(id_producto == p.Id) {
+                    unidades_producto += p.Unidades;
                 }
+             Console.WriteLine($"Se han añadido {unidades_producto} unidades al producto {p.Nombre}");
             }
-            return productoTemp;
+            
         }
+
 
         public void AnadirNuevosTipos() {
             int opcion = 0;

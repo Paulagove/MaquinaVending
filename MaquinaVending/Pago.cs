@@ -13,23 +13,28 @@ namespace MaquinaVending {
         public void PagoEfectivo(List<Producto> listaDeLaCompra) {
             double moneda = 0;
             double sumaMonedas = 0;
-            double PrecioTotal = 0;
+            double precioTotal = 0;
 
             foreach (Producto p in listaDeLaCompra) {
-                PrecioTotal += p.PrecioUnitario;
+               precioTotal += p.PrecioUnitario;
             }
             Console.WriteLine("Introduzca las monedas una a una: ");
             do {
-                for (double i = 0 ; i <= PrecioTotal ; i++) {
-                    moneda = float.Parse(Console.ReadLine());
+                for (double i = 0 ; i <= precioTotal ; i++) {
+                    moneda = double.Parse(Console.ReadLine());
                     sumaMonedas += moneda;
                 }
-            } while (sumaMonedas >= PrecioTotal );
+            } while (sumaMonedas >= precioTotal );
 
             Console.WriteLine("Pago realizado con éxito!");
-            Console.WriteLine($"Su cambio es de {sumaMonedas} - {PrecioTotal} euros");
+            Console.WriteLine($"Su cambio es de {sumaMonedas} - {precioTotal} euros");
         }
         public void PagoTarjeta(List<Producto> listaDeLaCompra) {
+            double precioTotal = 0;
+
+            foreach (Producto p in listaDeLaCompra) {
+                precioTotal += p.PrecioUnitario;
+            }
             Console.Write("Introduzca el número de la tarjeta: ");
             int NumeroTarjeta = int.Parse(Console.ReadLine());
             Console.Write("Introduzca la fecha de caducidad: ");
@@ -37,7 +42,7 @@ namespace MaquinaVending {
             Console.Write("Introduzca el código de seguridad: ");
             int CVV = int.Parse(Console.ReadLine());
 
-            Console.WriteLine("Pago realizado con éxito!");
+            Console.WriteLine($"Pago realizado de {precioTotal} euros con éxito!");
         }
 
     }
