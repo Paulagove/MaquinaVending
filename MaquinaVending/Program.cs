@@ -29,7 +29,7 @@ namespace MaquinaVending {
                         break;
                     case 2:
                         //primero se muestran todos y luego se especifican
-                        p.MostrarDetalles(productos);
+                        MostrarDetallesDeProducto();
                         break;
                     case 3:
                         Admin admin = new Admin(productos);
@@ -120,11 +120,11 @@ namespace MaquinaVending {
         }
 
 
-        public void SolicitarDetallesDeProducto() {
+        public void MostrarDetallesDeProducto() {
             bool continuidadsolicitud = false;
             do {
                 foreach (var producto in productos) {
-                    Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} ");
+                    Console.WriteLine($"ID: {producto.Id} - Nombre:{producto.Nombre}, Descripcion {producto.Descripcion}, Cantidad {producto.Unidades} ");
                 }
 
                 Producto productoSolicitado = BuscarProducto();
