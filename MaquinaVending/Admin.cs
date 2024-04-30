@@ -28,32 +28,35 @@ namespace MaquinaVending {
 
         public void CargaIndividual() {
             int opcion = 0;
-           
+            do {
                 Console.WriteLine("--- Carga individual de productos ---");
                 Console.WriteLine("1. Añadir existencias a productos existentes");
                 Console.WriteLine("2. Añadir nuevos tipos de productos");
                 Console.WriteLine("3. Salir al menú principal");
                 Console.Write("Seleccione una opción: ");
-            do {
+                
+
                 opcion = int.Parse(Console.ReadLine());
                 switch (opcion) {
                     case 1:
                         AnadirExistencias();
+                        Console.Clear();
                         break;
                     case 2:
                         AnadirNuevosTipos();
+                        Console.Clear();
                         break;
                     case 3:
                         Console.WriteLine("Saliendo al menú principal...");
+                        Console.Clear();
                         break;
                 }
-            }
-            while (opcion != 3);
-            
+            } while (opcion != 3);
+            Console.Clear();
         }
 
         public void AnadirExistencias() {
-
+            Producto productoTemp = null;
             foreach (Producto p in Productos) {
                 Console.WriteLine(p.MostrarDetalles());
             }
@@ -64,12 +67,18 @@ namespace MaquinaVending {
 
             foreach (Producto p in Productos) {
                 if (id_producto == p.Id) {
-                    unidades_producto += p.Unidades;
+                    productoTemp = p;
+
                 }
-                Console.WriteLine($"Se han añadido {unidades_producto} unidades al producto {p.Nombre}");
             }
 
-        }
+            if (productoTemp != null) {
+                    productoTemp.Unidades += unidades_producto;
+                }
+                Console.WriteLine($"Se han añadido {unidades_producto} unidades al producto {productoTemp.Nombre}");
+            }
+
+        
 
 
         public void AnadirNuevosTipos() {
@@ -86,22 +95,25 @@ namespace MaquinaVending {
             switch (opcion) {
 
                 case 1:
-                    MaterialesPreciosos mp = new MaterialesPreciosos();
+                    MaterialesPreciosos mp = new MaterialesPreciosos(Productos.Count);
                     mp.SolicitarDetalles();
                     Productos.Add(mp);
-                    Console.WriteLine("Producto añadido con éxito");
+                    Console.WriteLine("Producto  añadido con éxito");
+                    Console.Clear();
                     break;
                 case 2:
-                    ProductosAlimenticios pa = new ProductosAlimenticios();
+                    ProductosAlimenticios pa = new ProductosAlimenticios(Productos.Count);
                     pa.SolicitarDetalles();
                     Productos.Add(pa);
                     Console.WriteLine("Producto añadido con éxito");
+                    Console.Clear();
                     break;
                 case 3:
-                    ProductosElectronicos pe = new ProductosElectronicos();
+                    ProductosElectronicos pe = new ProductosElectronicos(Productos.Count);
                     pe.SolicitarDetalles();
                     Productos.Add(pe);
                     Console.WriteLine("Producto añadido con éxito");
+                    Console.Clear();
                     break;
                 case 4:
                     Console.WriteLine("Retrocediendo...");
@@ -117,27 +129,28 @@ namespace MaquinaVending {
             bool productosCargados = false;
             try {
                 if (File.Exists("example_vending_file_practical_work_i.csv")) {
-                    StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv");
-                    string header = sr.ReadLine();
+                    StreamReader sr = File.OpenText("example_vending_file_practical_work_i.csv"); 
                     string linea;
-                    Console.WriteLine(header);
+    
                     while ((linea = sr.ReadLine()) != null) {
                         productosCargados = true;
-                        string[] datos = linea.Split(';');
-                        if (datos[0] == "1") {
-                            MaterialesPreciosos mp = new MaterialesPreciosos(int.Parse(datos[0]), datos[1], int.Parse(datos[2]), double.Parse(datos[3]), datos[4], datos[5], double.Parse(datos[6]));
+                        string[] datos = linea.Split('|');
+
+                        if (datos[1] == "Material Precioso") {
+                            MaterialesPreciosos mp = new MaterialesPreciosos(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), double.Parse(datos[4]), datos[5], datos[6], double.Parse(datos[7]));
                             Productos.Add(mp);
                         }
-                        else if (datos[0] == "2") {
-                            ProductosAlimenticios pa = new ProductosAlimenticios(int.Parse(datos[0]), datos[1], int.Parse(datos[2]), double.Parse(datos[3]), datos[4], datos[5]);
+                        else if (datos[1] == "Producto Alimenticio") {
+                            ProductosAlimenticios pa = new ProductosAlimenticios(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), double.Parse(datos[4]), datos[5], datos[6]);
                             Productos.Add(pa);
                         }
-                        else if (datos[0] == "3") {
-                            ProductosElectronicos pe = new ProductosElectronicos(int.Parse(datos[0]), datos[1], int.Parse(datos[2]), double.Parse(datos[3]), datos[4], datos[5], bool.Parse(datos[6]), bool.Parse(datos[7]));
+                        else if (datos[1] == "Producto Alimenticio") {
+                            ProductosElectronicos pe = new ProductosElectronicos(int.Parse(datos[0]), datos[2], int.Parse(datos[3]), double.Parse(datos[4]), datos[5], datos[6], bool.Parse(datos[7]), bool.Parse(datos[7]));
                             Productos.Add(pe);
                         }
-
+                       
                     }
+                   
                 }
                 else {
                     File.Create("productos.txt").Close();

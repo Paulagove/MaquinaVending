@@ -27,37 +27,43 @@ namespace MaquinaVending {
                 switch (opcion) {
                     case 1:
                         RealizarCompra();
+                        Console.Clear();
                         break;
                     case 2:
                         //primero se muestran todos y luego se especifican
                         MostrarDetallesDeProducto();
+                        Console.Clear();
                         break;
                     case 3:
                         Console.Write("Introduzca la contraseña: ");
                         password = Console.ReadLine();
-                        while (admin.LoginAdmin(password) == true) {
+                        if (admin.LoginAdmin(password) == true) {
                             admin.CargaIndividual();
-                            Console.Clear();
-                            break;
                         }
-                        Console.WriteLine("Contraseña incorrecta");
-
+                        else {
+                            Console.WriteLine("Contraseña incorrecta");
+                        }
+                        Console.Clear();
                         break;
                     case 4:
                         Console.Write("Introduzca la contraseña: ");
                         password = Console.ReadLine();
-                        while (admin.LoginAdmin(password) == true) {
+                        if (admin.LoginAdmin(password) == true) {
                             admin.CargaCompleta();
-                            break;
                         }
-                        Console.WriteLine("Contraseña incorrecta");
+                        else {
+                            Console.WriteLine("Contraseña incorrecta");
+                        }
+                        Console.Clear();
                         break;
                     case 5:
                         Console.WriteLine("Saliendo...");
+                        Console.Clear();
                         break;
 
                 }
             } while (opcion != 5);
+            Console.ReadKey();
         }
 
         static void RealizarCompra() {
