@@ -111,7 +111,7 @@ namespace MaquinaVending {
 
                     case 1:
                         //se añade el .Count en productos para que se vaya sumando el número de ID a medida que creamos nuevos productos
-                        //se crean nuevas clases y se les solicitan los detalles
+                        //se crean nuevas clases de cada tipo de producto y se les solicitan los detalles. Luego, esos productos se añaden a la clase Productos
                         MaterialesPreciosos mp = new MaterialesPreciosos(Productos.Count); 
                         mp.SolicitarDetalles();
                         Productos.Add(mp);
@@ -160,7 +160,7 @@ namespace MaquinaVending {
                     while ((linea = sr.ReadLine()) != null) {
                         productosCargados = true;
                         string[] datos = linea.Split(';');
-                        //product_type;product_name;product_units;product_unit_prize;product_description;materials;weight;nutritional_information;has_battery;charged_by_default    
+            
                         if (datos[1] == "Material Precioso") {
                             MaterialesPreciosos mp = new MaterialesPreciosos(int.Parse(datos[0]), datos[1], datos[2], int.Parse(datos[3]), float.Parse(datos[4]), datos[5], datos[6], double.Parse(datos[7]));
                             Productos.Add(mp);

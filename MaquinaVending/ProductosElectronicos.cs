@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending {
-    internal class ProductosElectronicos : Producto {
+    internal class ProductosElectronicos : Producto { //hereda de la superclase Producto 
 
         public string TipoMaterial { get; set; }
         public bool TieneBateria { get; set; }
@@ -14,7 +14,7 @@ namespace MaquinaVending {
 
         public ProductosElectronicos() { }
 
-        public ProductosElectronicos(int count) {
+        public ProductosElectronicos(int count) { //Para que se sume cada número de ID a medida que se va añadiendo un producto
             Id = count + 1;
         }
 

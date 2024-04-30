@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending {
-    internal class MaterialesPreciosos : Producto {
+    internal class MaterialesPreciosos : Producto { //hereda de la superclase Producto
 
         public string TipoMaterial { get; set; }
         public double Peso { get; set; }
 
         public MaterialesPreciosos() { }
 
-        public MaterialesPreciosos(int count) {
+        public MaterialesPreciosos(int count) { //Para que se sume cada número de ID a medida que se va añadiendo un producto
             Id = count + 1;
         }
 

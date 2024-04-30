@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending {
-    internal abstract class Producto {
+    internal abstract class Producto { //superclase o clase padre
         public int Id { get; protected set; }
         public string TipoProducto { get; set; }
         public string Nombre { get; set; }

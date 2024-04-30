@@ -161,6 +161,7 @@ namespace MaquinaVending {
             }
         }
 
+        //método para buscar el producto por ID
         static Producto BuscarProducto() {
             Console.Write("ID del producto: ");
             int idBuscar = int.Parse(Console.ReadLine());
@@ -180,11 +181,12 @@ namespace MaquinaVending {
         }
 
 
+        //método que muestra los detalles de los productos: primero de manera general y luego de manera más específica
         static void MostrarDetallesDeProducto() {
             Console.WriteLine("+++ MOSTRAR DETALLES DE LOS PRODUCTOS +++");
             bool continuidadsolicitud = false;
             do {
-                foreach (var producto in Productos) {
+                foreach (var producto in Productos) {  
                     Console.WriteLine($"({producto.Id})|Nombre: {producto.Nombre} | Descripción: {producto.Descripcion} | Unidades: {producto.Unidades}");
                 }
 

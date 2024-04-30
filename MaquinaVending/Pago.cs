@@ -9,17 +9,18 @@ namespace MaquinaVending {
 
 
         public List<Producto> Productos = new List<Producto>();
-        public Pago(List<Producto> productos) {
+        public Pago(List<Producto> productos) { //se le pasa la lista de objetos de Productos
             Productos = productos;
         }
 
-        public void PagoEfectivo(List<Producto> listaDeLaCompra) {
+        //método para pagar en efectivo introduciendo monedas o billetes de uno en uno
+        public void PagoEfectivo(List<Producto> listaDeLaCompra) {  //se le pasa la lista listaDeLaCompra para obtener el precio de cada producto y las unidades seleccionadas
             float precioTotal = 0.00f;
             float[] efectivo = { 0.10f, 0.20f, 0.50f, 1.00f, 2.00f, 5.00f, 10.00f, 20.00f, 50.00f, 100.00f, 200.00f };
 
             float dineroIngresado = 0.00f;
 
-
+            //se calcula el precio total de la compra
             foreach (Producto p in listaDeLaCompra) {
                 precioTotal += p.PrecioUnitario * p.Unidades;
             }
@@ -57,8 +58,8 @@ namespace MaquinaVending {
             }
         }
 
-
-        public void PagoTarjeta(List<Producto> listaDeLaCompra) {
+        //método para pagar con tarjeta
+        public void PagoTarjeta(List<Producto> listaDeLaCompra) {  //se le pasa la lista listaDeLaCompra para obtener el precio de cada producto y las unidades seleccionadas
             float precioTotal = 0.00f;
 
             foreach (Producto p in listaDeLaCompra) {

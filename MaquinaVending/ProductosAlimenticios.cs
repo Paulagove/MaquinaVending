@@ -6,12 +6,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MaquinaVending {
-    internal class ProductosAlimenticios : Producto {
+    internal class ProductosAlimenticios : Producto {  //hereda de la superclase Producto 
 
         public string InformacionNutricional { get; set; }
         public ProductosAlimenticios() { }
 
-        public ProductosAlimenticios(int count) {
+        public ProductosAlimenticios(int count) { //Para que se sume cada número de ID a medida que se va añadiendo un producto
             Id = count + 1;
         }
 
