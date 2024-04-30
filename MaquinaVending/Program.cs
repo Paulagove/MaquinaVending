@@ -49,12 +49,14 @@ namespace MaquinaVending {
 
         static void RealizarCompra() {
             List<Producto> listaDeLaCompra = new List<Producto>();
+            static List<Producto> productos = new List<Producto>(12);
+
             Producto productoElegido = null;
             bool continuidadCompra = false;
             do {
                 Console.WriteLine("Compra de Producto:");
-                foreach (Producto p in productos) {
-                    Console.WriteLine($"ID: {p.Id} - {p.Nombre} - Precio: {p.PrecioUnitario} - Unidades disponibles: {p.Unidades}");
+                foreach (Producto producto in productos) {
+                    Console.WriteLine($"ID: {producto.Id} - {producto.Nombre} - Precio: {producto.PrecioUnitario} - Unidades disponibles: {producto.Unidades}");
                 }
                 Console.WriteLine("Ingrese el ID del producto que desea comprar: ");
                 int id = int.Parse(Console.ReadLine());
@@ -69,7 +71,7 @@ namespace MaquinaVending {
                 }
                 listaDeLaCompra.Add(productoElegido);
                 Console.WriteLine("Producto Añadido a la Cesta");
-
+                productos.Remove(productoElegido);
                 Console.Write("Quiere Añadir mas productos a la cesta? (1.Sí/2.No): ");
                 continuidadCompra = bool.Parse(Console.ReadLine());
 
